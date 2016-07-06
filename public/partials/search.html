@@ -1,0 +1,31 @@
+<div ng-controller="IndexController">
+
+  <h1>Search<small>Foods</small></h1>
+  <input class="input" ng-model="view.query" type="text" name="name" value="">
+  <span><button ng-click="view.searchNx(view.query)" class="btn btn-success" type="button" name="button">Search</button></span>
+  <p>{{view.query}}
+  </p>
+  <table class="table table-hover">
+    <tr ng-repeat="item in view.results">
+      <td>
+        <a ng-href="#/item?itemId={{item._id}}">Deets</a>
+      </td>
+      <td>
+        {{item.fields.brand_name}}
+      </td>
+      <td>
+        {{item.fields.item_name}}
+      </td>
+      <td>
+        {{item.fields.item_description}}
+      </td>
+
+      <td>
+        The fats: {{item.fields.nf_total_fat}}
+      </td>
+      <td>
+        Cal: {{item.fields.nf_calories}}
+      </td>
+    </tr>
+  </table>
+</div>

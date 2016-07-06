@@ -1,0 +1,28 @@
+<div ng-controller="ItemController">
+  <h1>{{view.itemDetail.item_name}}</h1>
+  <table class="table">
+    <tr >
+      <td>
+        {{view.itemDetail.brand_name}}
+      </td>
+      <td>
+        {{view.itemDetail.item_name}}
+      </td>
+      <td>
+        Description {{view.itemDetail.item_description}}
+      </td>
+      <td>
+        fats: {{view.itemDetail.nf_total_fat}} grams
+      </td>
+      <td>
+        <p>
+          Cal: {{view.itemDetail.nf_calories}}
+        </p>
+        <p>
+          Cal from fat: {{view.itemDetail.nf_calories_from_fat}}
+        </p>
+
+      </td>
+    </tr>
+  </table>
+</div>
