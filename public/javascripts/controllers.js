@@ -23,6 +23,8 @@ app.controller('IndexController', function($scope, $http) {
 app.controller("ItemController", function($scope, $http, $routeParams) {
   $scope.view = {};
   $scope.view.itemDetail = {};
+  $scope.view.submitData = {};
+  $scope.view.submitData.mealDateTime = new Date();
   $scope.view.itemNx = function(itemId) {
     $http({
       method: "GET",

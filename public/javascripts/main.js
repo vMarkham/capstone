@@ -1,4 +1,4 @@
-var app = angular.module('mealTracker', ['ngRoute']);
+var app = angular.module('mealTracker', ['ngRoute', 'ui.bootstrap.datetimepicker']);
 
 app.config(function($routeProvider) {
   $routeProvider
