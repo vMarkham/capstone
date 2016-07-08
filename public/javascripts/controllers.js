@@ -20,11 +20,13 @@ app.controller('IndexController', function($scope, $http) {
 
 })
 
-app.controller("ItemController", function($scope, $http, $routeParams) {
+app.controller("ItemController", function($scope, $http, $routeParams, $location) {
   $scope.view = {};
   $scope.view.itemDetail = {};
   $scope.view.submitData = {};
   $scope.view.submitData.mealDateTime = new Date();
+  $scope.view.submitData.servingsEaten = 1;
+
   $scope.view.itemNx = function(itemId) {
     $http({
       method: "GET",
@@ -34,6 +36,19 @@ app.controller("ItemController", function($scope, $http, $routeParams) {
       console.log($scope.view.itemDetail);
     }, function error(res) {
       alert("fail");
+    })
+  }
+  $scope.view.submitForm = function() {
+    console.log('click');
+    $http({
+      method: "POST",
+      url: 'api/meal',
+      data: $scope.view.submitData
+    }).then(function success(res) {
+      $location.path('/');
+      console.log($scope.view.submitData)
+    }, function error(res) {
+      alert('failure');
     })
   }
   $scope.view.itemNx($routeParams.itemId);

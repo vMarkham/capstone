@@ -14,10 +14,10 @@
         {{view.itemDetail.item_name}}
       </td>
       <td>
-        Description {{view.itemDetail.item_description}}
+        Description: {{view.itemDetail.item_description}}
       </td>
       <td>
-        fats: {{view.itemDetail.nf_total_fat}} grams
+        fat: {{view.itemDetail.nf_total_fat}} grams
       </td>
       <td>
         <p>
@@ -26,21 +26,28 @@
         <p>
           Cal from fat: {{view.itemDetail.nf_calories_from_fat}}
         </p>
-
+        <p>
+          serving size: {{view.itemDetail.nf_serving_size_qty}} {{view.itemDetail.nf_serving_size_unit}}
+        </p>
       </td>
     </tr>
   </table>
   <div class="modal fade" id="mealSubmitModal" tabindex="-1">
-  <div class="modal-dialog" role="form">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title">Log a meal</h4>
       </div>
       <div class="modal-body">
-        <form class="" action="index.html" method="post">
+        <form class="" ng-submit="view.submitForm()">
           <div class="form-group">
-            <label for="">Date and time</label>
+            <label for="serving">How many servings did you eat?</label> <span>Serving size: {{view.itemDetail.nf_serving_size_qty}} {{view.itemDetail.nf_serving_size_unit}}</span>
+            <input class="form-control" ng-model="view.submitData.servingsEaten" type="number" name="serving">
+            <p class="help-block">total cal: {{view.submitData.servingsEaten * view.itemDetail.nf_calories}}</p>
+          </div>
+          <div class="form-group">
+            <label for="dropdownDate">Date and time</label>
             <div class="dropdown">
               <a class="dropdown-toggle" id="dropdownDate" role="button" data-toggle="dropdown" data-target="#" href="">
                 <div class="input-group"><input type="text" class="form-control" ng-model="view.submitData.mealDateTime"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -52,11 +59,11 @@
             </div>
             <p class="help-block">Select date, then time.</p>
           </div>
+          <input class="btn" type="submit" name="submit" id="submit" value="Save meal">
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save meal</button>
       </div>
     </div>
   </div>

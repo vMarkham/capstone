@@ -32,4 +32,9 @@ router.get('/id/:itemId', function(req, res, next) {
   });
 })
 
+router.post('/meal', function(req, res ,next) {
+  console.log(req.body.servingsEaten);
+  res.json({message: "success"})
+})
+
 module.exports = router;
