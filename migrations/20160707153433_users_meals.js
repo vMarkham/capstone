@@ -1,4 +1,3 @@
-
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('users_meals', function(table) {
       table.integer('user_id');

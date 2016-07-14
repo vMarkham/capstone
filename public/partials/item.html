@@ -1,12 +1,42 @@
 <div ng-controller="ItemController">
-  <h1>{{view.itemDetail.item_name}}</h1>
-  <table class="table ">
+  <h1>{{view.itemDetail.item_name}} <small>{{view.itemDetail.brand_name}}</small></h1>
+  <div class="row">
+    <div class="col-md-6">
+      <p ng-show="view.itemDetail.nf_ingredient_statement">
+        Ingredients: {{view.itemDetail.nf_ingredient_statement}}
+      </p>
+      <p ng-show="view.itemDetail.item_description">
+        Description: {{view.itemDetail.item_description}}
+      </p>
+    </div>
+    <div class="col-md-6">
+      <p>
+        Nutritional Information <span>serving size: {{view.itemDetail.nf_serving_size_qty}} {{view.itemDetail.nf_serving_size_unit}} ({{view.itemDetail.nf_serving_weight_grams}}g)</span>
+      </p>
+      <ul>
+        <li ng-show="view.itemDetail.nf_calories">Cal: {{view.itemDetail.nf_calories}}</li>
+        <li ng-show="view.itemDetail.nf_calories_from_fat">Cal from fat: {{view.itemDetail.nf_calories_from_fat}}</li>
+        <li ng-show="view.itemDetail.nf_total_fat">Fat: {{view.itemDetail.nf_total_fat}}g</li>
+        <li ng-show="view.itemDetail.nf_saturated_fat">Saturated fat: {{view.itemDetail.nf_saturated_fat}}g</li>
+        <li ng-show="view.itemDetail.nf_monounsaturated_fat">Monounsaturated fat: {{view.itemDetail.nf_monounsaturated_fat}}g</li>
+        <li ng-show="view.itemDetail.nf_polyunsaturated_fat">Polyunsaturated fat: {{view.itemDetail.nf_polyunsaturated_fat}}g</li>
+        <li ng-show="view.itemDetail.nf_trans_fatty_acid">Trans-fatty Acids: {{view.itemDetail.nf_trans_fatty_acid}}g</li>
+        <li ng-show="view.itemDetail.nf_cholesterol">Cholesterol: {{view.itemDetail.nf_cholesterol}}mg</li>
+        <li ng-show="view.itemDetail.nf_sodium">Sodium: {{view.itemDetail.nf_sodium}}mg</li>
+        <li ng-show="view.itemDetail.nf_total_carbohydrate">Carbohydrates: {{view.itemDetail.nf_total_carbohydrate}}g</li>
+        <li ng-show="view.itemDetail.nf_dietary_fiber">Dietary fiber: {{view.itemDetail.nf_dietary_fiber}}g</li>
+        <li ng-show="view.itemDetail.nf_sugars">Sugars: {{view.itemDetail.nf_sugars}}g</li>
+        <li ng-show="view.itemDetail.nf_protein">Protein: {{view.itemDetail.nf_protein}}g</li>
+        <li ng-show="view.itemDetail.nf_vitamin_a_dv">Vitamin A: {{view.itemDetail.nf_vitamin_a_dv}}%DV</li>
+        <li ng-show="view.itemDetail.nf_vitamin_c_dv">Vitamin C: {{view.itemDetail.nf_vitamin_c_dv}}%DV</li>
+        <li ng-show="view.itemDetail.nf_calcium_dv">Calcium: {{view.itemDetail.nf_calcium_dv}}%DV</li>
+        <li ng-show="view.itemDetail.nf_iron_dv">Iron: {{view.itemDetail.nf_iron_dv}}%DV</li>
+        <li ng-show="view.itemDetail.nf_potassium">Potassium {{view.itemDetail.nf_potassium}}mg</li>
+      </ul>
+    </div>
+  </div>
+  <!-- <table class="table ">
     <tr >
-      <td>
-        <button type="button" data-toggle="modal" data-target="#mealSubmitModal" class="btn btn-default">
-          Add meal!
-        </button>
-      </td>
       <td>
         {{view.itemDetail.brand_name}}
       </td>
@@ -31,41 +61,26 @@
         </p>
       </td>
     </tr>
-  </table>
-  <div class="modal fade" id="mealSubmitModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Log a meal</h4>
-      </div>
-      <div class="modal-body">
-        <form class="" ng-submit="view.submitForm()">
-          <div class="form-group">
-            <label for="serving">How many servings did you eat?</label> <span>Serving size: {{view.itemDetail.nf_serving_size_qty}} {{view.itemDetail.nf_serving_size_unit}}</span>
-            <input class="form-control" ng-model="view.submitData.servingsEaten" type="number" name="serving">
-            <p class="help-block">total cal: {{view.submitData.servingsEaten * view.itemDetail.nf_calories}}</p>
-          </div>
-          <div class="form-group">
-            <label for="dropdownDate">Date and time</label>
-            <div class="dropdown">
-              <a class="dropdown-toggle" id="dropdownDate" role="button" data-toggle="dropdown" data-target="#" href="">
-                <div class="input-group"><input type="text" class="form-control" ng-model="view.submitData.mealDateTime"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker ng-model="view.submitData.mealDateTime" data-datetimepicker-config="{ dropdownSelector: '#dropdownDate' }"/>
-              </ul>
-            </div>
-            <p class="help-block">Select date, then time.</p>
-          </div>
-          <input class="btn" type="submit" name="submit" id="submit" value="Save meal">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+  </table> -->
+  <form class="" ng-submit="view.submitForm()">
+    <div class="form-group">
+      <label for="serving">How many servings did you eat?</label> <span>Serving size: {{view.itemDetail.nf_serving_size_qty}} {{view.itemDetail.nf_serving_size_unit}}</span>
+      <input class="form-control" ng-model="view.submitData.servingsEaten" type="number" name="serving">
+      <p class="help-block">total cal: {{view.submitData.servingsEaten * view.itemDetail.nf_calories}}</p>
     </div>
-  </div>
-  </div>
+    <div class="form-group">
+      <label for="dropdownDate">Date and time</label>
+      <div class="dropdown">
+        <a class="dropdown-toggle" id="dropdownDate" role="button" data-toggle="dropdown" data-target="#" href="">
+          <div class="input-group"><input type="text" class="form-control" ng-model="view.submitData.mealDateTime"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <datetimepicker ng-model="view.submitData.mealDateTime" data-datetimepicker-config="{ dropdownSelector: '#dropdownDate' }"/>
+        </ul>
+      </div>
+      <p class="help-block">Select date, then time.</p>
+    </div>
+    <input class="btn" type="submit" name="submit" id="submit" value="Save meal">
+  </form>
 </div>
