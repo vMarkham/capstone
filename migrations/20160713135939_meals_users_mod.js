@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
     return knex.schema.table('users_meals', function(table) {
-      table.integer('heath_index');
+      table.integer('health_index');
     })
 };
 

@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('item_name');
     table.string('brand_name');
     table.string('item_description');
-    table.string("nf_ingredient_statement");
+    table.text("nf_ingredient_statement");
     table.float('nf_calories');
     table.float("nf_calories_from_fat");
     table.float("nf_total_fat");
@@ -20,10 +20,10 @@ exports.up = function(knex, Promise) {
     table.float("nf_dietary_fiber");
     table.float("nf_sugars");
     table.float("nf_protein");
-    table.integer("nf_vitamin_a_dv");
-    table.integer("nf_vitamin_c_dv");
-    table.integer("nf_calcium_dv");
-    table.integer("nf_iron_dv");
+    table.float("nf_vitamin_a_dv");
+    table.float("nf_vitamin_c_dv");
+    table.float("nf_calcium_dv");
+    table.float("nf_iron_dv");
     table.float("nf_potassium")
     table.float("nf_servings_per_container");
     table.float("nf_serving_size_qty");
