@@ -37,68 +37,54 @@ app.controller("DashController", ['$scope', '$http', function($scope, $http) {
   //angular nvd3 chart options
 
   function setOptions() {
-
-
-  return {
-    chart: {
-      type: 'discreteBarChart',
-      height: 450,
-      margin : {
-        top: 20,
-        right: 20,
-        bottom: 40,
-        left: 55
-      },
-      // focusEnable: false,
-      x: function(d){return d[0];},
-      y: function(d){return d[1];},
-      showValues: true,
-      valueFormat: function(d){
-        return d3.format(',.1f')(d);
-      },
-      xAxis: {
-        axisLabel: 'Weekday',
-        tickFormat: function(d){
-          return d3.time.format("%A")(new Date(d));
-
+    return {
+      chart: {
+        type: 'discreteBarChart',
+        height: 450,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 40,
+          left: 55
         },
-        showMaxMin: false
-      },
-      yAxis: {
-        axisLabel: 'Healh index',
-        tickFormat: function(d){
-          return d3.format('.02f')(d);
+        x: function(d){return d[0];},
+        y: function(d){return d[1];},
+        showValues: true,
+        valueFormat: function(d){
+          return d3.format(',.1f')(d);
         },
-        axisLabelDistance: -10
+        xAxis: {
+          axisLabel: 'Weekday',
+          tickFormat: function(d){
+            return d3.time.format("%A")(new Date(d));
+
+          },
+          showMaxMin: false
+        },
+        yAxis: {
+          axisLabel: 'Healh index',
+          tickFormat: function(d){
+            return d3.format('.02f')(d);
+          },
+          axisLabelDistance: -10
+        },
+        callback: function(chart){
+        }
       },
-      callback: function(chart){
-        console.log("!!! lineChart callback !!!");
+      title: {
+        enable: true,
+        text: 'Average Health Index'
+      },
+      subtitle: {
+        enable: true,
+        text: 'Average health index for the past week.',
+        css: {
+          'text-align': 'center',
+          'margin': '10px 13px 0px 7px'
+        }
       }
-    },
-    title: {
-      enable: true,
-      text: 'Average daily health index'
-    },
-    subtitle: {
-      enable: true,
-      text: 'Subtitle for simple line chart. Lorem ipsum dolor sit amet, at eam blandit sadipscing, vim adhuc sanctus disputando ex, cu usu affert alienum urbanitas.',
-      css: {
-        'text-align': 'center',
-        'margin': '10px 13px 0px 7px'
-      }
-    },
-    caption: {
-      enable: true,
-      html: '<b>Figure 1.</b> Lorem ipsum dolor sit amet, at eam blandit sadipscing, <span style="text-decoration: underline;">vim adhuc sanctus disputando ex</span>, cu usu affert alienum urbanitas. <i>Cum in purto erat, mea ne nominavi persecuti reformidans.</i> Docendi blandit abhorreant ea has, minim tantas alterum pro eu. <span style="color: darkred;">Exerci graeci ad vix, elit tacimates ea duo</span>. Id mel eruditi fuisset. Stet vidit patrioque in pro, eum ex veri verterem abhorreant, id unum oportere intellegam nec<sup>[1, <a href="https://github.com/krispo/angular-nvd3" target="_blank">2</a>, 3]</sup>.',
-      css: {
-        'text-align': 'justify',
-        'margin': '10px 13px 0px 7px'
-      }
-    }
-  };
-}
-
-
+    };
+  }
 
   //angular-nvd3 Data Formatting
   function formatWeek() {
@@ -123,10 +109,9 @@ app.controller("DashController", ['$scope', '$http', function($scope, $http) {
     //return bar chart data
     return [
       {
-        values: meals,      //values - represents the array of {x,y} data points
+        values: meals,
         bar: true,
-        key: 'This weeks health index' //key  - the name of the series.
-        // color: '#ff7f0e'  //color - optional: choose your own line color.
+        key: 'This weeks health index'
       }
     ];
   };

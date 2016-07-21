@@ -82,7 +82,6 @@ router.get('/history/week', function(req, res, next) {
   })
 })
 
-
 router.post('/meal', function(req, res ,next) {
   console.log(req.body);
   var nutritionixItemAPI = 'https://api.nutritionix.com/v1_1/item?id='
