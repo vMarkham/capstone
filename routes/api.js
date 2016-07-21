@@ -68,7 +68,7 @@ router.get('/history/week', function(req, res, next) {
         if (meal.date_time >= lastWeek) {
           thisWeekMeals.push(meal);
         }
-        if (meal.date_time.setHours(0,0,0,0) == today.setHours(0,0,0,0)) {
+        if (new Date(meal.date_time).setHours(0,0,0,0) == new Date(today).setHours(0,0,0,0)) {
           todayMeals.push(meal);
         }
       })
@@ -121,10 +121,10 @@ router.post('/meal', function(req, res ,next) {
         nf_serving_size_unit: json.nf_serving_size_unit,
         nf_serving_weight_grams: json.nf_serving_weight_grams
       }).then(function() {
-        if (1 - (json.nf_sugars/30 + json.nf_calories/800) / 2 < 0) {
+        if (1 - (json.nf_sugars * req.body.servingsEaten / 30 + json.nf_calories * req.body.servingsEaten / 800) / 2 < 0) {
           var healthIndex = 0;
         } else {
-          var healthIndex = Math.floor((1 - (json.nf_sugars/30 + json.nf_calories/800) / 2) * 100); //total bs calculation
+          var healthIndex = Math.floor((1 - (json.nf_sugars * req.body.servingsEaten /30 + json.nf_calories * req.body.servingsEaten /800) / 2) * 100); //total bs calculation
         }
         return UsersMeals().insert({
           user_id: 0,
