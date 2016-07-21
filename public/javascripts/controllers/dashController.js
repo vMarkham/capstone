@@ -41,7 +41,7 @@ app.controller("DashController", ['$scope', '$http', function($scope, $http) {
 
   return {
     chart: {
-      type: 'historicalBarChart',
+      type: 'discreteBarChart',
       height: 450,
       margin : {
         top: 20,
@@ -49,7 +49,7 @@ app.controller("DashController", ['$scope', '$http', function($scope, $http) {
         bottom: 40,
         left: 55
       },
-      focusEnable: false,
+      // focusEnable: false,
       x: function(d){return d[0];},
       y: function(d){return d[1];},
       showValues: true,
@@ -57,11 +57,12 @@ app.controller("DashController", ['$scope', '$http', function($scope, $http) {
         return d3.format(',.1f')(d);
       },
       xAxis: {
-        axisLabel: 'Weekdays',
+        axisLabel: 'Weekday',
         tickFormat: function(d){
-          return d3.time.format("%a")(new Date(d));
+          return d3.time.format("%A")(new Date(d));
 
-        }
+        },
+        showMaxMin: false
       },
       yAxis: {
         axisLabel: 'Healh index',
@@ -105,33 +106,21 @@ app.controller("DashController", ['$scope', '$http', function($scope, $http) {
     var dateCount = new Date();
     dateCount.setDate(dateCount.getDate() - 7);
     dateCount.setHours(0,0,0,0);
-    console.log(dateCount);
     for (var i = 0; i <= 7; i++) {
       var lunchbox = [];
       for (var j = 0; j < $scope.view.weekMeals.length; j++) {
         var thisMealDate = new Date($scope.view.weekMeals[j].date_time);
         thisMealDate.setHours(0,0,0,0);
-        console.log("thismeal", thisMealDate);
-        console.log("dateCount", dateCount);
         if (thisMealDate.getTime() == dateCount.getTime()) {
           lunchbox.push($scope.view.weekMeals[j]);
           console.log(thisMealDate.getTime() == dateCount.getTime());
         }
       }
-
       meals.push([dateCount, $scope.view.getAvgHI(lunchbox)])
-
       dateCount = new Date(dateCount);
       dateCount.setDate(dateCount.getDate() + 1);
     }
-    //Data is represented as an array of {x,y} pairs.
-    // for (var i = 0; i < $scope.view.weekMeals.length; i++) {
-    //   console.log($scope.view.weekMeals[i].date_time);
-    //   meals.push([new Date($scope.view.weekMeals[i].date_time).setHours(0,0,0,0),
-    //               $scope.view.weekMeals[i].health_index]);
-    // }
-
-    //Line chart data should be sent as an array of series objects.
+    //return bar chart data
     return [
       {
         values: meals,      //values - represents the array of {x,y} data points
